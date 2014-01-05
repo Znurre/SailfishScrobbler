@@ -1,0 +1,51 @@
+#ifndef TRACK_H
+#define TRACK_H
+
+#include <QObject>
+
+const unsigned int MIN_LENGTH = 30;
+const unsigned int MAX_LENGTH = 240;
+
+class Track : public QObject
+{
+	Q_OBJECT
+
+	Q_PROPERTY(QString artist READ artist NOTIFY artistChanged)
+	Q_PROPERTY(QString title READ title NOTIFY titleChanged)
+
+	Q_PROPERTY(bool isNowPlaying READ isNowPlaying NOTIFY isNowPlayingChanged)
+
+	public:
+		Track(const QString &artist, const QString &title, const bool nowPlaying);
+
+		bool isNowPlaying() const;
+
+		QString artist() const;
+		QString title() const;
+		QString timestamp();
+
+		void submit();
+		void markAsPlayed();
+		void love();
+
+	private:
+		void timerEvent(QTimerEvent *event);
+
+		QString m_artist;
+		QString m_title;
+
+		bool m_nowPlaying;
+		bool m_submitted;
+
+		unsigned int m_timestamp;
+		unsigned int m_timerId;
+
+	signals:
+		void artistChanged();
+		void titleChanged();
+		void isNowPlayingChanged();
+};
+
+Q_DECLARE_METATYPE(Track *)
+
+#endif // TRACK_H
