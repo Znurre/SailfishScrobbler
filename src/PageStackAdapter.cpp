@@ -8,6 +8,7 @@
 PageStackAdapter::PageStackAdapter()
 	 : m_pageStack(0)
 {
+
 }
 
 QString PageStackAdapter::url() const

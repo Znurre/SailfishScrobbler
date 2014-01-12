@@ -7,33 +7,20 @@
 #include "Track.h"
 #include "AudioscrobblerAdapter.h"
 #include "Scrobbler.h"
-
-ScrobblerPageViewModel::ScrobblerPageViewModel()
-{
-	Settings settings;
-
-	m_history = settings.history();
-}
-
-ScrobblerPageViewModel::~ScrobblerPageViewModel()
-{
-	Settings settings;
-	settings.setHistory(m_history);
-	settings.sync();
-}
-
-QString ScrobblerPageViewModel::url() const
-{
-	return m_url;
-}
+#include "QStringEx.h"
 
 QList<QObject *> ScrobblerPageViewModel::history() const
 {
 	QList<QObject *> result;
 
-	for(int i = 0; i < m_history.count() && i < 20; i++)
+	for(int i = 0; i < m_history.count() && i < 30; i++)
 	{
-		result << m_history[i];
+		Track *track = m_history[i];
+
+		if(!track->isDiscarded() || track->isNowPlaying())
+		{
+			result << track;
+		}
 	}
 
 	return result;
@@ -79,17 +66,11 @@ void ScrobblerPageViewModel::stoppedPlaying()
 	if(current)
 	{
 		current->markAsPlayed();
+		current->submit();
 
 		emit historyChanged();
 		emit isNowPlayingChanged();
 	}
-}
-
-void ScrobblerPageViewModel::selectPlayer()
-{
-	m_url = "PlayerSelectionPage.qml";
-
-	emit urlChanged();
 }
 
 void ScrobblerPageViewModel::love()

@@ -6,12 +6,12 @@
 #         - desktop icon filename must be changed
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
-TARGET = Audioscrobbler
+TARGET = harbour-audioscrobbler
 
 QT += xml network
 CONFIG += sailfishapp c++11
 
-SOURCES += src/Audioscrobbler.cpp \
+SOURCES += \
     src/PulseAudioModel.cpp \
     src/PulseAudioThread.cpp \
     src/NetworkObject.cpp \
@@ -22,7 +22,6 @@ SOURCES += src/Audioscrobbler.cpp \
     src/SignatureBuilder.cpp \
     src/Settings.cpp \
     src/MainPageViewModel.cpp \
-    src/WelcomePageViewModel.cpp \
     src/PageStackAdapter.cpp \
     src/ScrobblerPageViewModel.cpp \
     src/Track.cpp \
@@ -32,16 +31,23 @@ SOURCES += src/Audioscrobbler.cpp \
     src/Status.cpp \
     src/ScrobblerViewModel.cpp \
     src/CoverPageViewModel.cpp \
-    src/ConnectPageViewModel.cpp
+    src/ConnectPageViewModel.cpp \
+    src/main.cpp
 
-OTHER_FILES += qml/Audioscrobbler.qml \
+OTHER_FILES += \
     qml/cover/CoverPage.qml \
-    rpm/Audioscrobbler.spec \
-    rpm/Audioscrobbler.yaml \
-    Audioscrobbler.desktop \
+    rpm/harbour-audioscrobbler.spec \
+    rpm/harbour-audioscrobbler.yaml \
     qml/pages/MainPage.qml \
-    qml/pages/PlayerSelectionPage.qml \
-    qml/pages/ConnectPage.qml
+    qml/pages/ConnectPage.qml \
+    qml/NowPlayingItemTemplate.qml \
+    qml/HistoryItemTemplate.qml \
+    qml/NowPlayingHeaderTemplate.qml \
+    qml/HistoryHeaderTemplate.qml \
+    qml/MediaListItem.qml \
+    harbour-audioscrobbler.desktop \
+    harbour-audioscrobbler.png \
+    qml/harbour-audioscrobbler.qml
 
 HEADERS += \
     src/PulseAudioModel.h \
@@ -54,7 +60,6 @@ HEADERS += \
     src/SignatureBuilder.h \
     src/Settings.h \
     src/MainPageViewModel.h \
-    src/WelcomePageViewModel.h \
     src/AudioscrobblerAdapter.h \
     src/PageStackAdapter.h \
     src/ScrobblerPageViewModel.h \

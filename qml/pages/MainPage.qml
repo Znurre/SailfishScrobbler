@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import Sailfish.Media 1.0
-import AvoidPointer 1.0
+import harbour.audioscrobbler 1.0
 
 Page
 {
@@ -42,25 +41,36 @@ Page
 		ViewPlaceholder
 		{
 			text: "Welcome to the Sailfish Scrobbler.\n\nPlease connect your last.fm account to enable scrobbling."
-			visible: !main.isConfigured
-			enabled: true
+			enabled: !main.isConfigured
 		}
 
 		SilicaListView
 		{
-			visible: main.isConfigured
 			anchors.fill: parent
+			visible: main.isConfigured
 			model: model.history
-			delegate: MediaListItem
+			delegate: Loader
 			{
-				title: modelData.title
-				subtitle: modelData.artist
-				highlighted: modelData.isNowPlaying
+				source: modelData.isNowPlaying ?
+					Qt.resolvedUrl("../NowPlayingItemTemplate.qml") :
+					Qt.resolvedUrl("../HistoryItemTemplate.qml")
 			}
 
-			header: PageHeader
+			section
 			{
-				title: "Tracks"
+				property: "modelData.isNowPlaying"
+				delegate: Loader
+				{
+					anchors
+					{
+						left: parent.left
+						right: parent.right
+					}
+
+					source: section == "true" ?
+						Qt.resolvedUrl("../NowPlayingHeaderTemplate.qml") :
+						Qt.resolvedUrl("../HistoryHeaderTemplate.qml")
+				}
 			}
 
 			ViewPlaceholder
