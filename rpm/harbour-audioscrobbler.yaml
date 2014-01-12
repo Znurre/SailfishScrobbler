@@ -4,7 +4,7 @@ Version: 0.1
 Release: 2
 Group: Qt/Qt
 URL: http://example.org/
-License: Freeware
+License: GPLv3
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-

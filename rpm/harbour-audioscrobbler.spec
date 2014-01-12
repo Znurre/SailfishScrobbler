@@ -6,6 +6,10 @@
 Name:       harbour-audioscrobbler
 
 # >> macros
+
+# list here all the libraries your application installs
+%define __requires_exclude ^libpulse.*$
+
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -16,7 +20,7 @@ Summary:    Audioscrobbler
 Version:    0.1
 Release:    2
 Group:      Qt/Qt
-License:    Freeware
+License:    GPLv3
 URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-audioscrobbler.yaml
