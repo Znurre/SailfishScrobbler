@@ -18,7 +18,7 @@ Name:       harbour-audioscrobbler
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Audioscrobbler
 Version:    0.1
-Release:    2
+Release:    4
 Group:      Qt/Qt
 License:    GPLv3
 URL:        http://example.org/
